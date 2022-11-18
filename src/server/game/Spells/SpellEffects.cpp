@@ -19,7 +19,9 @@
 #include "AccountMgr.h"
 #include "Battleground.h"
 #include "CellImpl.h"
+#include "Chat.h"
 #include "Common.h"
+#include "Config.h"
 #include "Creature.h"
 #include "CreatureAI.h"
 #include "DatabaseEnv.h"
@@ -55,6 +57,8 @@
 #include "SpellAuras.h"
 #include "SpellHistory.h"
 #include "SpellMgr.h"
+#include <string>
+#include "StringFormat.h"
 #include "TemporarySummon.h"
 #include "Totem.h"
 #include "UpdateMask.h"
@@ -2955,6 +2959,8 @@ void Spell::EffectTameCreature()
         return;
 
     Unit* unitCaster = GetUnitCasterForEffectHandlers();
+
+
     if (!unitCaster || unitCaster->GetPetGUID())
         return;
 
@@ -2969,7 +2975,7 @@ void Spell::EffectTameCreature()
     if (creatureTarget->IsPet())
         return;
 
-    if (unitCaster->GetClass() != CLASS_HUNTER)
+   if (unitCaster->GetClass() != CLASS_HUNTER)
         return;
 
     // cast finish successfully
@@ -3003,7 +3009,7 @@ void Spell::EffectTameCreature()
     {
         pet->SavePetToDB(PET_SAVE_AS_CURRENT);
         unitCaster->ToPlayer()->PetSpellInitialize();
-    }
+	}
 }
 
 void Spell::EffectSummonPet()
@@ -5280,6 +5286,7 @@ void Spell::EffectActivateRune()
 
 void Spell::EffectCreateTamedPet()
 {
+	PetType petType = MAX_PET_TYPE;
     if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT_TARGET)
         return;
 

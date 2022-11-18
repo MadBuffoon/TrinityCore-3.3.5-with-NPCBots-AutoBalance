@@ -20,6 +20,7 @@
 #include "ArenaTeamMgr.h"
 #include "Bag.h"
 #include "Chat.h"
+#include "Config.h"
 #include "Containers.h"
 #include "CreatureAIFactory.h"
 #include "DatabaseEnv.h"
@@ -2959,7 +2960,15 @@ void ObjectMgr::LoadItemTemplates()
         for (uint8 i = 0; i < itemTemplate.StatsCount; ++i)
         {
             itemTemplate.ItemStat[i].ItemStatType  = uint32(fields[28 + i*2].GetUInt8());
+			if (sConfigMgr->GetBoolDefault("Stats.Cap", true))
+				{
             itemTemplate.ItemStat[i].ItemStatValue = int32(fields[29 + i*2].GetInt16());
+				}
+			else
+				{
+			itemTemplate.ItemStat[i].ItemStatValue = int32(fields[29 + i*2].GetInt32());		
+				}
+			
         }
 
         itemTemplate.ScalingStatDistribution = uint32(fields[48].GetUInt16());
