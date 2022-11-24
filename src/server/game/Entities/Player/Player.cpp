@@ -16911,7 +16911,6 @@ void Player::KilledMonsterCredit(uint32 entry, ObjectGuid guid /*= ObjectGuid::E
             }
         }
     }
-	
 	//skulystats
 	if (sConfigMgr->GetBoolDefault("DungeonStatsReward.Enable", true))
 						{
@@ -17057,8 +17056,8 @@ void Player::KilledMonsterCredit(uint32 entry, ObjectGuid guid /*= ObjectGuid::E
 
 							}
 					}
-						}
-						}
+		    }
+	}
 
 }
 
